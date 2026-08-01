@@ -151,11 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (transitionStarted) return;
             clickCount++;
             if (clickCount === 1) {
-                btnTroVe.style.transform = 'translateX(-90px)';
+                btnTroVe.style.transform = 'translateX(-110px)';
                 showWelcomeMessage('😊<br>Ơ...<br>Mình đã bảo bắt đầu đâu!');
             } else if (clickCount === 2) {
-                btnTroVe.style.transform = 'translateX(90px)';
-                showWelcomeMessage('😁<br>Khoan đã...<br>Mật khẩu đâu?<br>Có đúng dân A9 không đấy?');
+                btnTroVe.style.transform = 'translateX(110px)';
+                showWelcomeMessage('😁<br>Khoan đã...Mật khẩu đâu?<br>Bạn có đúng dân A9 không đấy?');
             } else if (clickCount === 3) {
                 btnTroVe.style.transform = 'translateX(0)';
                 btnTroVe.classList.add('glow');
@@ -197,8 +197,8 @@ setTimeout(() => {
     returnMessage?.classList.add('show');
     setTimeout(() => {
         returnMessage?.classList.remove('show');
-    }, 3000);
-}, 5550);
+    }, 4500);
+}, 2000);
         setTimeout(() => {
             doorContainer.style.display = 'none';
         }, 6900);
