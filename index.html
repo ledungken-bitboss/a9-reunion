@@ -17,12 +17,14 @@
         <canvas id="petal-canvas"></canvas>
         
         <div class="welcome-content">
-            <h1 class="welcome-title">20 năm rồi...<br>Chúng ta về nhé?</h1>
+            <h1 class="welcome-title">A9 ơi...<br>20 năm rồi.<br>Mình về nhé.</h1>
             <span class="welcome-heart">❤️</span>
             <div id="welcome-msg" class="welcome-msg"></div>
             <button id="btn-trove" class="btn-trove">TRỞ VỀ</button>
         </div>
     </div>
+
+    <div id="return-message" class="return-message">Chào mừng bạn trở về A9 thân thương ❤️</div>
 
     <!-- ================= 2. HIỆU ỨNG CỬA LỚP HỌC ================= -->
     <div id="door-container" class="door-container">
@@ -42,10 +44,7 @@
         </div>
     </div>
 
-    <!-- QUOTE THANH XUÂN -->
-    <div id="welcome-quote">
-        "Có những cuộc gặp<br>chỉ cần chậm lại một chút...<br>đã là cả thanh xuân."
-    </div>
+    <button id="music-toggle" class="music-toggle" type="button" aria-label="Bật hoặc tắt nhạc">♪</button>
 
     <!-- ================= 3. TRANG CHỦ ================= -->
     <main id="main-content" class="main-content">
@@ -72,15 +71,6 @@
                     <div class="swiper-button-next"></div>
                 </div>
 
-                <!-- Thanh điều khiển -->
-                <div class="album-controls">
-                    <button class="control-btn" type="button" id="albumPrev">❮ Trước</button>
-                    <button class="control-btn" type="button" id="albumPlay">▶ Phát</button>
-                    <button class="control-btn" type="button" id="albumPause">⏸ Dừng</button>
-                    <button class="control-btn" type="button" id="albumNext">Sau ❯</button>
-                    <button class="control-btn" type="button" id="albumFullscreen">⛶ Phóng to</button>
-                </div>
-
                 <!-- Thanh ảnh nhỏ bên dưới (Thumbnails) -->
                 <div class="swiper album-thumbs">
                     <div class="swiper-wrapper" id="thumbsWrapper">
@@ -90,20 +80,30 @@
             </div>
         </section>
 
-     <!-- KHU VỰC ALBUM VIDEO -->
+        <!-- KHU VỰC VIDEO KỶ NIỆM -->
         <section id="video-section" class="content-section">
-            <h2 class="section-title">🎥 ALBUM VIDEO KỶ NIỆM</h2>
+            <h2 class="section-title">🎥 VIDEO KỶ NIỆM</h2>
             <div class="video-grid">
                 <div class="video-item">
                     <video controls preload="metadata">
-                        <!-- Đường dẫn tìm video trong các thư mục phổ biến -->
-                        <source src="videos/a9-video.mp4" type="video/mp4">
-                        <source src="videos/a9-video.MOV" type="video/quicktime">
-                        <source src="a9-video.MOV" type="video/quicktime">
-                        <source src="a9-video.mp4" type="video/mp4">
+                        <source src="videos/1.mp4" type="video/mp4">
                         Trình duyệt của bạn không hỗ trợ phát video này.
                     </video>
-                    <p class="video-caption">Video Mời Cô & Khoảnh Khắc A9 Trở Về</p>
+                    <p class="video-caption">Video Kỷ Niệm 1</p>
+                </div>
+                <div class="video-item">
+                    <video controls preload="metadata">
+                        <source src="videos/2.mp4" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ phát video này.
+                    </video>
+                    <p class="video-caption">Video Kỷ Niệm 2</p>
+                </div>
+                <div class="video-item">
+                    <video controls preload="metadata">
+                        <source src="videos/3.mp4" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ phát video này.
+                    </video>
+                    <p class="video-caption">Video Gặp Lại Cô</p>
                 </div>
             </div>
         </section>

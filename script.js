@@ -3,19 +3,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. CẤU HÌNH DANH SÁCH ẢNH ALBUM (Tự động nạp từ a9 (1) -> a9 (12))
     // ==========================================================
     const imageList = [
-        "images/a9 (1).jpg",
-        "images/a9 (2).jpg",
-        "images/a9 (3).jpg",
-        "images/a9 (4).jpg",
-        "images/a9 (5).jpg",
-        "images/a9 (6).jpg",
-        "images/a9 (7).jpg",
-        "images/a9 (8).jpg",
-        "images/a9 (9).jpg",
-        "images/a9 (10).JPG",
-        "images/a9 (11).JPG",
-        "images/a9 (12).jpg",
-        "images/tap-the-a9-now.jpg"
+        "images/1.jpg",
+        "images/2.jpg",
+        "images/3.jpg",
+        "images/4.jpg",
+        "images/5.jpg",
+        "images/6.jpg",
+        "images/7.jpg",
+        "images/8.jpg",
+        "images/9.jpg",
+        "images/10.jpg",
+        "images/11.jpg",
+        "images/12.jpg",
+        "images/13.jpg",
+        "images/14.jpg",
+        "images/15.JPG",
+        "images/16.jpg",
+        "images/17.JPG",
+        "images/18.JPG",
+        "images/19.JPG",
+        "images/20.JPG",
+        "images/21.JPG",
+        "images/22.JPG",
+        "images/23.JPG",
+        "images/24.jpg",
+        "images/25.jpg"
     ];
 
     const slideshowWrapper = document.getElementById('slideshowWrapper');
@@ -26,13 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Nạp ảnh chính
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
-            slide.innerHTML = `<img src="${imgSrc}" onerror="this.src='${imgSrc.replace('images/', '')}'" alt="A9 Kỷ niệm">`;
+            slide.innerHTML = `<img src="${imgSrc}" loading="lazy" decoding="async" alt="A9 Kỷ niệm">`;
             slideshowWrapper.appendChild(slide);
 
             // Nạp ảnh Thumbnail
             const thumb = document.createElement('div');
             thumb.className = 'swiper-slide';
-            thumb.innerHTML = `<img src="${imgSrc}" onerror="this.src='${imgSrc.replace('images/', '')}'" alt="A9 Thumb">`;
+            thumb.innerHTML = `<img src="${imgSrc}" loading="lazy" decoding="async" alt="A9 Thumb">`;
             thumbsWrapper.appendChild(thumb);
         });
 
@@ -54,31 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
             thumbs: {
                 swiper: albumThumbs,
             },
+            speed: 650,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
             autoplay: false
-        });
-
-        // Gán sự kiện cho các nút bấm điều khiển
-        document.getElementById('albumPrev')?.addEventListener('click', () => albumSwiper.slidePrev());
-        document.getElementById('albumNext')?.addEventListener('click', () => albumSwiper.slideNext());
-        
-        document.getElementById('albumPlay')?.addEventListener('click', () => {
-            albumSwiper.params.autoplay.delay = 2500;
-            albumSwiper.autoplay.start();
-            alert('Đã bật tự động phát ảnh!');
-        });
-        
-        document.getElementById('albumPause')?.addEventListener('click', () => {
-            albumSwiper.autoplay.stop();
-            alert('Đã tạm dừng phát ảnh!');
-        });
-
-        document.getElementById('albumFullscreen')?.addEventListener('click', () => {
-            const elem = document.querySelector('.album-swiper');
-            if (!document.fullscreenElement) {
-                elem.requestFullscreen?.() || elem.webkitRequestFullscreen?.();
-            } else {
-                document.exitFullscreen?.();
-            }
         });
     }
 
@@ -141,42 +134,105 @@ document.addEventListener('DOMContentLoaded', () => {
     const welcomeMsg = document.getElementById('welcome-msg');
     const welcomeScreen = document.getElementById('welcome-screen');
     const doorContainer = document.getElementById('door-container');
-    const welcomeQuote = document.getElementById('welcome-quote');
+    const returnMessage = document.getElementById('return-message');
+    const musicToggle = document.getElementById('music-toggle');
+    const reunionMusic = new Audio('music/minhvenhe.mp3');
+    reunionMusic.loop = true;
 
     let clickCount = 0;
+    let musicStarted = false;
+    let transitionStarted = false;
+    let welcomeMessageTimer;
+    let welcomeFadeTimer;
+    const savedMusicPreference = localStorage.getItem('a9MusicMuted');
 
     if (btnTroVe) {
         btnTroVe.addEventListener('click', () => {
+            if (transitionStarted) return;
             clickCount++;
             if (clickCount === 1) {
                 btnTroVe.style.transform = 'translateX(-120px)';
-                welcomeMsg.textContent = 'Ơ kìa... nhanh thế sao?😄';
+                showWelcomeMessage('😊<br>Ơ...<br>Mình đã bảo bắt đầu đâu!');
             } else if (clickCount === 2) {
                 btnTroVe.style.transform = 'translateX(120px)';
-                welcomeMsg.textContent = 'Có chắc là học sinh A9 không? 😁';
+                showWelcomeMessage('😁<br>Khoan đã...<br>Mật khẩu đâu?<br>Có đúng dân A9 không đấy?');
             } else if (clickCount === 3) {
                 btnTroVe.style.transform = 'translateX(0)';
-                welcomeMsg.innerHTML = 'Ha ha... đùa chút thôi.<br>Mời bạn TRỜ VỀ.';
                 btnTroVe.classList.add('glow');
-                setTimeout(() => {
-                    if (clickCount === 3) startTransition();
-                }, 800);
+                showWelcomeMessage('🥰<br>Ha ha...<br>Đùa chút thôi.<br>Mình cùng Trở về nhé!');
+                startTransition();
             } else if (clickCount >= 4) {
                 startTransition();
             }
         });
     }
 
+    function showWelcomeMessage(message, onComplete) {
+        if (!welcomeMsg) return;
+        clearTimeout(welcomeMessageTimer);
+        clearTimeout(welcomeFadeTimer);
+        welcomeMsg.innerHTML = message;
+        welcomeMsg.classList.add('show');
+        welcomeMessageTimer = setTimeout(() => {
+            welcomeMsg.classList.remove('show');
+            welcomeFadeTimer = setTimeout(() => {
+                onComplete?.();
+            }, 400);
+        }, 2500);
+    }
+
     function startTransition() {
+        if (transitionStarted) return;
+        transitionStarted = true;
         welcomeScreen.classList.add('fade-out');
         playSchoolSound();
-        setTimeout(() => { doorContainer.classList.add('open'); }, 300);
-        setTimeout(() => { welcomeQuote.classList.add('show'); }, 1200);
         setTimeout(() => {
-            welcomeQuote.classList.remove('show');
-            setTimeout(() => { doorContainer.style.display = 'none'; }, 800);
-        }, 2800);
+            doorContainer.classList.add('open');
+            startMusic();
+        }, 300);
+        setTimeout(() => {
+            returnMessage?.classList.add('show');
+            setTimeout(() => {
+                returnMessage?.classList.remove('show');
+            }, 1100);
+        }, 5550);
+        setTimeout(() => {
+            doorContainer.style.display = 'none';
+        }, 6900);
     }
+
+    function startMusic() {
+        if (musicStarted) return;
+        musicStarted = true;
+        reunionMusic.volume = 0.72;
+        musicToggle?.classList.add('show');
+
+        if (savedMusicPreference === 'true') {
+            musicToggle?.classList.add('muted');
+            musicToggle.textContent = '♪';
+            return;
+        }
+
+        reunionMusic.play().then(() => {
+            musicToggle?.classList.remove('muted');
+        }).catch(() => {
+            musicToggle?.classList.add('muted');
+        });
+    }
+
+    musicToggle?.addEventListener('click', () => {
+        if (reunionMusic.paused) {
+            reunionMusic.play();
+            musicToggle.classList.remove('muted');
+            musicToggle.textContent = '♪';
+            localStorage.setItem('a9MusicMuted', 'false');
+        } else {
+            reunionMusic.pause();
+            musicToggle.classList.add('muted');
+            musicToggle.textContent = '♪';
+            localStorage.setItem('a9MusicMuted', 'true');
+        }
+    });
 
     function playSchoolSound() {
         try {
