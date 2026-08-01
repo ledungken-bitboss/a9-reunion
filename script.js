@@ -151,16 +151,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (transitionStarted) return;
             clickCount++;
             if (clickCount === 1) {
-                btnTroVe.style.transform = 'translateX(-120px)';
+                btnTroVe.style.transform = 'translateX(-90px)';
                 showWelcomeMessage('😊<br>Ơ...<br>Mình đã bảo bắt đầu đâu!');
             } else if (clickCount === 2) {
-                btnTroVe.style.transform = 'translateX(120px)';
+                btnTroVe.style.transform = 'translateX(90px)';
                 showWelcomeMessage('😁<br>Khoan đã...<br>Mật khẩu đâu?<br>Có đúng dân A9 không đấy?');
             } else if (clickCount === 3) {
                 btnTroVe.style.transform = 'translateX(0)';
                 btnTroVe.classList.add('glow');
-                showWelcomeMessage('🥰<br>Ha ha...<br>Đùa chút thôi.<br>Mình cùng Trở về nhé!');
-                startTransition();
+               showWelcomeMessage('🥰<br>Ha ha...<br>Đùa chút thôi.<br>Mình cùng Trở về nhé!');
+
+setTimeout(() => {
+    startTransition();
+}, 1800);
             } else if (clickCount >= 4) {
                 startTransition();
             }
@@ -186,16 +189,16 @@ document.addEventListener('DOMContentLoaded', () => {
         transitionStarted = true;
         welcomeScreen.classList.add('fade-out');
         playSchoolSound();
-        setTimeout(() => {
-            doorContainer.classList.add('open');
-            startMusic();
-        }, 300);
-        setTimeout(() => {
-            returnMessage?.classList.add('show');
-            setTimeout(() => {
-                returnMessage?.classList.remove('show');
-            }, 1100);
-        }, 5550);
+setTimeout(() => {
+    doorContainer.classList.add('open');
+    startMusic();
+}, 1800);
+     setTimeout(() => {
+    returnMessage?.classList.add('show');
+    setTimeout(() => {
+        returnMessage?.classList.remove('show');
+    }, 3000);
+}, 5550);
         setTimeout(() => {
             doorContainer.style.display = 'none';
         }, 6900);
@@ -207,33 +210,71 @@ document.addEventListener('DOMContentLoaded', () => {
         reunionMusic.volume = 0.72;
         musicToggle?.classList.add('show');
 
-        if (savedMusicPreference === 'true') {
-            musicToggle?.classList.add('muted');
-            musicToggle.textContent = '♪';
-            return;
-        }
+     if (savedMusicPreference === 'true') {
+    musicToggle?.classList.add('muted');
+    musicToggle.textContent = '🔇';
+    return;
+}
 
-        reunionMusic.play().then(() => {
-            musicToggle?.classList.remove('muted');
-        }).catch(() => {
-            musicToggle?.classList.add('muted');
-        });
+     reunionMusic.play().then(() => {
+    musicToggle?.classList.remove('muted');
+    musicToggle.textContent = '🔊';
+}).catch(() => {
+    musicToggle?.classList.add('muted');
+    musicToggle.textContent = '🔇';
+});
     }
 
-    musicToggle?.addEventListener('click', () => {
-        if (reunionMusic.paused) {
-            reunionMusic.play();
-            musicToggle.classList.remove('muted');
-            musicToggle.textContent = '♪';
-            localStorage.setItem('a9MusicMuted', 'false');
-        } else {
+   musicToggle?.addEventListener('click', () => {
+
+    if (reunionMusic.paused) {
+
+        reunionMusic.play();
+
+        musicToggle.classList.remove('muted');
+
+        musicToggle.textContent = '🔊';
+
+        localStorage.setItem('a9MusicMuted', 'false');
+
+    } else {
+
+        reunionMusic.pause();
+
+        musicToggle.classList.add('muted');
+
+        musicToggle.textContent = '🔇';
+
+        localStorage.setItem('a9MusicMuted', 'true');
+
+    }
+
+});
+// ===== Auto pause music when watching videos =====
+document.querySelectorAll("video").forEach(video => {
+
+    video.addEventListener("play", () => {
+        if (!reunionMusic.paused) {
             reunionMusic.pause();
-            musicToggle.classList.add('muted');
-            musicToggle.textContent = '♪';
-            localStorage.setItem('a9MusicMuted', 'true');
+            musicToggle?.classList.add("muted");
         }
     });
 
+    video.addEventListener("pause", () => {
+        if (musicStarted && reunionMusic.paused) {
+            reunionMusic.play().catch(()=>{});
+            musicToggle?.classList.remove("muted");
+        }
+    });
+
+    video.addEventListener("ended", () => {
+        if (musicStarted && reunionMusic.paused) {
+            reunionMusic.play().catch(()=>{});
+            musicToggle?.classList.remove("muted");
+        }
+    });
+
+});
     function playSchoolSound() {
         try {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();

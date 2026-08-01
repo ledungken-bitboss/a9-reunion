@@ -126,13 +126,13 @@ body:has(#welcome-screen:not(.fade-out)) {
 
 .btn-trove {
     position: relative;
-    padding: 16px 55px;
-    font-size: 1.4rem;
+    padding: 13px 34px;
+    font-size: 1.0rem;
     font-weight: 800;
     color: #fff8e7;
     background: linear-gradient(135deg, #8c2121 0%, #4a0d0d 100%);
     border: 2px solid #e2b052;
-    border-radius: 40px;
+    border-radius: 999px;
     cursor: pointer;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -481,5 +481,24 @@ footer { text-align: center; padding: 30px; color: #a08080; }
     .swiper-button-next, .swiper-button-prev {
         width: 40px !important;
         height: 40px !important;
+    }
+}
+.sound-tip{
+    margin-top:20px;
+    text-align:center;
+    color:#FFF8E7;
+    font-size:15px;
+    line-height:1.6;
+    opacity:.9;
+    text-shadow:0 2px 8px rgba(0,0,0,.65);
+    animation: soundTip 2s ease-in-out infinite;
+}
+
+@keyframes soundTip{
+    0%,100%{
+        opacity:.65;
+    }
+    50%{
+        opacity:1;
     }
 }
