@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A9 - 20 Năm Trở Về</title>
+    <!-- Thư viện Swiper Slider CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- CSS Dự án -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ================= 1. WELCOME SCREEN ================= -->
+    <div id="welcome-screen">
+        <div class="welcome-bg"></div>
+        <canvas id="petal-canvas"></canvas>
+        
+        <div class="welcome-content">
+            <h1 class="welcome-title">20 năm rồi...<br>Chúng ta về nhé?</h1>
+            <span class="welcome-heart">❤️</span>
+            <div id="welcome-msg" class="welcome-msg"></div>
+            <button id="btn-trove" class="btn-trove">TRỞ VỀ</button>
+        </div>
+    </div>
+
+    <!-- ================= 2. HIỆU ỨNG CỬA LỚP HỌC ================= -->
+    <div id="door-container" class="door-container">
+        <div class="door door-left">
+            <div class="door-sign">
+                <span class="school-name">THPT NAM SÁCH</span>
+                <h2 class="class-name">LỚP A9</h2>
+                <p class="school-year">NIÊN KHÓA 2003 – 2006</p>
+            </div>
+        </div>
+        <div class="door door-right">
+            <div class="door-sign">
+                <span class="school-name">THPT NAM SÁCH</span>
+                <h2 class="class-name">LỚP A9</h2>
+                <p class="school-year">NIÊN KHÓA 2003 – 2006</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUOTE THANH XUÂN -->
+    <div id="welcome-quote">
+        "Có những cuộc gặp<br>chỉ cần chậm lại một chút...<br>đã là cả thanh xuân."
+    </div>
+
+    <!-- ================= 3. TRANG CHỦ ================= -->
+    <main id="main-content" class="main-content">
+        <!-- HERO SECTION: Nút Album + Logo AVTAR.png chính giữa -->
+        <section class="hero-custom">
+            <div class="hero-custom-content">
+                <a href="#album-section" class="hero-btn">📷 Album ảnh</a>
+                <img src="images/AVTAR.png" onerror="this.src='AVTAR.png'" alt="Logo A9" class="hero-logo-center">
+                <a href="#video-section" class="hero-btn">🎥 Album video</a>
+            </div>
+        </section>
+
+        <!-- KHU VỰC ALBUM ẢNH CÓ NÚT NEXT/PREV/PLAY/FULLSCREEN -->
+        <section id="album-section" class="content-section">
+            <h2 class="section-title">📷 ALBUM ẢNH KỶ NIỆM A9</h2>
+            
+            <div class="album-stage">
+                <!-- Slideshow ảnh chính -->
+                <div class="swiper album-swiper">
+                    <div class="swiper-wrapper" id="slideshowWrapper">
+                        <!-- Ảnh tự động nạp từ script.js -->
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+
+                <!-- Thanh điều khiển -->
+                <div class="album-controls">
+                    <button class="control-btn" type="button" id="albumPrev">❮ Trước</button>
+                    <button class="control-btn" type="button" id="albumPlay">▶ Phát</button>
+                    <button class="control-btn" type="button" id="albumPause">⏸ Dừng</button>
+                    <button class="control-btn" type="button" id="albumNext">Sau ❯</button>
+                    <button class="control-btn" type="button" id="albumFullscreen">⛶ Phóng to</button>
+                </div>
+
+                <!-- Thanh ảnh nhỏ bên dưới (Thumbnails) -->
+                <div class="swiper album-thumbs">
+                    <div class="swiper-wrapper" id="thumbsWrapper">
+                        <!-- Thumbnail tự động nạp từ script.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+     <!-- KHU VỰC ALBUM VIDEO -->
+        <section id="video-section" class="content-section">
+            <h2 class="section-title">🎥 ALBUM VIDEO KỶ NIỆM</h2>
+            <div class="video-grid">
+                <div class="video-item">
+                    <video controls preload="metadata">
+                        <!-- Đường dẫn tìm video trong các thư mục phổ biến -->
+                        <source src="videos/a9-video.mp4" type="video/mp4">
+                        <source src="videos/a9-video.MOV" type="video/quicktime">
+                        <source src="a9-video.MOV" type="video/quicktime">
+                        <source src="a9-video.mp4" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ phát video này.
+                    </video>
+                    <p class="video-caption">Video Mời Cô & Khoảnh Khắc A9 Trở Về</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Nơi thanh xuân bắt đầu – Nơi ký ức mãi trở về.</p>
+        </footer>
+    </main>
+
+    <!-- Thư viện Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Script Dự án -->
+    <script src="script.js"></script>
+</body>
+</html>

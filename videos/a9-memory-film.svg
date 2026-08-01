@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Video động kỷ niệm 20 năm A9">
+  <defs>
+    <linearGradient id="filmBg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff8ea"/>
+      <stop offset=".55" stop-color="#d7a84f"/>
+      <stop offset="1" stop-color="#7d1613"/>
+    </linearGradient>
+    <style>
+      .fade1{animation:f1 12s infinite}.fade2{animation:f2 12s infinite}.fade3{animation:f3 12s infinite}
+      .petal{animation:fall 8s linear infinite}.petal:nth-child(2){animation-delay:1.4s}.petal:nth-child(3){animation-delay:2.8s}.petal:nth-child(4){animation-delay:4.2s}
+      @keyframes f1{0%,28%{opacity:1}36%,100%{opacity:0}}
+      @keyframes f2{0%,30%{opacity:0}38%,62%{opacity:1}70%,100%{opacity:0}}
+      @keyframes f3{0%,64%{opacity:0}72%,100%{opacity:1}}
+      @keyframes fall{from{transform:translateY(-80px) rotate(0)}to{transform:translateY(820px) rotate(280deg)}}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="url(#filmBg)"/>
+  <g class="fade1">
+    <text x="640" y="286" text-anchor="middle" fill="#7d1613" font-family="Georgia,serif" font-size="98" font-weight="700">A9</text>
+    <text x="640" y="366" text-anchor="middle" fill="#34251b" font-family="Arial,sans-serif" font-size="42" font-weight="700">THPT Nam Sach | 2003 - 2006</text>
+  </g>
+  <g class="fade2">
+    <text x="640" y="292" text-anchor="middle" fill="#fff8ea" font-family="Georgia,serif" font-size="82" font-weight="700">43 hoc sinh</text>
+    <text x="640" y="374" text-anchor="middle" fill="#fff8ea" font-family="Arial,sans-serif" font-size="38">duoc ghep thanh lop A9</text>
+  </g>
+  <g class="fade3">
+    <text x="640" y="286" text-anchor="middle" fill="#fff8ea" font-family="Georgia,serif" font-size="86" font-weight="700">26 ban tro ve</text>
+    <text x="640" y="368" text-anchor="middle" fill="#f3c667" font-family="Arial,sans-serif" font-size="42" font-weight="700">09/08/2026</text>
+  </g>
+  <g fill="#e24a3b">
+    <path class="petal" d="M132 0c26-20 58-4 52 26-6 35-52 50-76 24-17-18-1-36 24-50Z"/>
+    <path class="petal" d="M430-140c22-18 54-8 50 20-5 32-48 46-70 22-16-16-2-31 20-42Z"/>
+    <path class="petal" d="M840-70c28-21 62-5 56 28-7 37-56 54-82 26-18-19 0-38 26-54Z"/>
+    <path class="petal" d="M1110-220c24-18 55-5 50 24-6 33-49 48-72 24-17-17-2-33 22-48Z"/>
+  </g>
+</svg>
