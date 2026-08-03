@@ -532,3 +532,23 @@ footer { text-align: center; padding: 30px; color: #a08080; }
     text-shadow:0 1px 4px rgba(0,0,0,.6);
     letter-spacing:.5px;
 }
+.album-swiper{
+    cursor: zoom-in;
+}
+
+.album-swiper:fullscreen{
+    width:100vw;
+    height:100vh;
+    background:#000;
+}
+
+.album-swiper:fullscreen .swiper-wrapper,
+.album-swiper:fullscreen .swiper-slide{
+    height:100%;
+}
+
+.album-swiper:fullscreen img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}

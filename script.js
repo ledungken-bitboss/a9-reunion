@@ -76,6 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
     disableOnInteraction: false,
 },
         });
+// ===== Double click để fullscreen slideshow =====
+const albumEl = document.querySelector(".album-swiper");
+
+albumEl.addEventListener("dblclick", () => {
+
+    if (!document.fullscreenElement) {
+        albumEl.requestFullscreen().catch(()=>{});
+    } else {
+        document.exitFullscreen();
+    }
+
+});
     }
 
     // ==========================================================
